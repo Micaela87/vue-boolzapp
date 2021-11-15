@@ -79,10 +79,14 @@ img {
     width: 95%;
     margin: 0.25rem 0.9rem;
     border: none;
-    text-align: center;
+    padding-left: 5rem;
 }
 
-::placeholder {
+.searchbar input:focus-visible {
+    border: 3px solid blueviolet;
+}
+
+.searchbar input::placeholder {
     color: #dddede;
     font-size: 1.2rem;
 }
@@ -173,12 +177,17 @@ textarea {
     height: 80%;
     border: none;
     border-radius: 10px;
+    padding: 1.2rem 1rem;
+}
+
+textarea:focus-visible {
+    border: 3px solid blueviolet;
 }
 
 textarea::placeholder {
     font-family: 'Roboto', sans-serif;
     color: #828282;
-    margin-left: 1rem;
+    font-size: 1.2rem;
 }
 
 .msg-icon {
