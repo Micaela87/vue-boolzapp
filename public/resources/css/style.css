@@ -1,0 +1,32 @@
+/* general rules */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+}
+
+/* flex container */
+.container {
+    display: flex;
+    align-items: stretch;
+    width: 90%;
+    height: calc(100vh - 4rem);
+    margin: 2rem auto;
+}
+
+.contacts {
+    width: 40%;
+    /* debugging rules */
+    background-color: aquamarine;
+}
+
+.messages {
+    width: 60%;
+    /* debugging rules */
+    background-color: cadetblue;
+}
