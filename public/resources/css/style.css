@@ -14,6 +14,7 @@ img {
     width: 4rem;
     height: auto;
     border-radius: 50%;
+    margin: 0.5rem;
 }
 
 /* flex container */
@@ -23,6 +24,21 @@ img {
     width: 90%;
     height: calc(100vh - 4rem);
     margin: 2rem auto;
+    font-size: 1rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: #e9ebeb;
+    border-right: 1px solid #dadada;
+}
+
+.user, .single-contact {
+    display: flex;
+    align-items: center;
 }
 
 .contacts {
@@ -35,4 +51,41 @@ img {
     width: 60%;
     /* debugging rules */
     background-color: cadetblue;
+}
+
+.chat {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: #e9ebeb;
+    border-left: 1px solid #dadada;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.msg {
+    border-radius: 10px;
+    padding: 1rem;
+    width: fit-content;
+    margin: 1rem;
+}
+
+.received {
+    background-color: white;
+}
+
+.sent {
+    background-color: #d5f9ba;
+    align-self: flex-end;
 }
