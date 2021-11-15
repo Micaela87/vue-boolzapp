@@ -5,13 +5,13 @@ const myApp = new Vue({
        searchParams: '',
         user: {
             name: 'Anna',
-            avatar: './public/resources/img/avatar_io.jpg',
+            avatar: '_io',
             visible: true
         },
         contacts: [
             {
                "name": "Michele",
-               "avatar": "./public/resources/img/avatar_1.jpg",
+               "avatar": "_1",
                "visible": true,
                "messages": [
                   {
@@ -33,7 +33,7 @@ const myApp = new Vue({
             },
             {
                "name": "Fabio",
-               "avatar": "./public/resources/img/avatar_2.jpg",
+               "avatar": "_2",
                "visible": false,
                "messages": [
                   {
@@ -55,7 +55,7 @@ const myApp = new Vue({
             },
             {
                "name": "Samuele",
-               "avatar": "./public/resources/img/avatar_3.jpg",
+               "avatar": "_3",
                "visible": false,
                "messages": [
                   {
@@ -77,7 +77,7 @@ const myApp = new Vue({
             },
             {
                "name": "Ilario",
-               "avatar": "./public/resources/img/avatar_4.jpg",
+               "avatar": "_4",
                "visible": false,
                "messages": [
                   {
