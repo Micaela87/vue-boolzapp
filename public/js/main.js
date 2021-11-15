@@ -10,7 +10,7 @@ const myApp = new Vue({
             { 
                 name: 'Michele', 
                 avatar: './public/resources/img/avatar_1.jpg', 
-                visible: true,
+                visible: false,
                 messages: [ 
                     { 
                         date: '10/01/2020 15:30:55', 
@@ -28,8 +28,36 @@ const myApp = new Vue({
                         status: 'received'
                     }
                 ], 
+            },
+            {   
+                name:   'Fabio',   
+                avatar:   './public/resources/img/avatar_2.jpg',   
+                visible:   false,   
+                messages:   [   
+                    {   
+                        date:   '20/03/2020   16:30:00',   
+                        text:   'Ciao   come   stai?',   
+                        status:   'sent'   
+                    },   
+                    {   
+                        date:   '20/03/2020   16:30:55',   
+                        text:   'Bene   grazie!   Stasera   ci   vediamo?',   
+                        status:   'received'   
+                    },   
+                    {   
+                        date:   '20/03/2020   16:35:00',   
+                        text:   'Mi   piacerebbe   ma   devo   andare   a   fare   la   spesa.',   
+                        status:   'sent'   
+                    }   
+                ],   
             }
         ]
+    },
+    methods: {
+        showConversation(index) {
+            console.log(index);
+            this.contacts[index].visible = true;
+        }
     }
 });
 
