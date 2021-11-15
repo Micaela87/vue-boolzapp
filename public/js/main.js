@@ -1,11 +1,16 @@
 const myApp = new Vue({
     el: '#app',
     data: {
+        user: {
+            name: 'Anna',
+            avatar: './public/resources/img/avatar_io.jpg',
+            visible: true
+        },
         contacts: [ 
             { 
                 name: 'Michele', 
-                avatar: '_1', 
-                visible: true, 
+                avatar: './public/resources/img/avatar_1.jpg', 
+                visible: true,
                 messages: [ 
                     { 
                         date: '10/01/2020 15:30:55', 
@@ -25,8 +30,7 @@ const myApp = new Vue({
                 ], 
             }
         ]
-    },
-    methods: {
-
     }
 });
+
+// console.log(myApp.getLastReceivedMsg());
