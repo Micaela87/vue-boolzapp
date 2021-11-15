@@ -98,7 +98,11 @@ img {
 
 .single-contact {
     background-color: #ffffff;
-    border: 1px solid #f5f5f5;
+    border: 1px solid #e9ebeb;
+}
+
+.selected {
+    background-color: #e9ebeb;
 }
 
 .messages {

@@ -34,7 +34,7 @@
                 <i class="fas fa-search search-lens"></i>
                 <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
-            <div v-for="(contact, i) in contacts" class="single-contact" :key="i" @click="showConversation(i)">
+            <div v-for="(contact, i) in contacts" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
                 <img :src="contact.avatar" :alt="contact.name">
                 <span>{{ contact.name }}</span>
             </div>
