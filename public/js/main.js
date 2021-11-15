@@ -2,6 +2,7 @@ const myApp = new Vue({
     el: '#app',
     data: {
        newMsg: '',
+       searchParams: '',
         user: {
             name: 'Anna',
             avatar: './public/resources/img/avatar_io.jpg',
@@ -97,6 +98,11 @@ const myApp = new Vue({
         showConversation(index) {
             console.log(index);
             this.contacts[index].visible = true;
+            for (let i = 0; i < this.contacts.length; i++) {
+               if (i !== index) {
+                  this.contacts[i].visible = false;
+               }
+            }
         },
         sendMsg() {
            let newObj = {
@@ -108,7 +114,7 @@ const myApp = new Vue({
               if (this.contacts[i].visible) {
                   newObj.text = this.newMsg;
                   this.contacts[i].messages.push(newObj);
-                  console.log(this.contacts[i].messages);
+                  newMsg = '';
                   setTimeout(this.automaticResponse(i), 1000);
               }
            }
@@ -123,5 +129,3 @@ const myApp = new Vue({
         }
     }
 });
-
-console.log(myApp.contacts[0].messages);
