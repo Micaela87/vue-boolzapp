@@ -57,7 +57,7 @@
             </div>
             <div class="msg-textarea">
                 <i class="far fa-smile msg-icon"></i>
-                <textarea name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
+                <textarea v-model="newMsg" @keyup.enter="sendMsg" name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
                 <i class="fas fa-microphone msg-icon"></i>
             </div>
         </div>

@@ -1,6 +1,7 @@
 const myApp = new Vue({
     el: '#app',
     data: {
+       newMsg: '',
         user: {
             name: 'Anna',
             avatar: './public/resources/img/avatar_io.jpg',
@@ -96,8 +97,22 @@ const myApp = new Vue({
         showConversation(index) {
             console.log(index);
             this.contacts[index].visible = true;
+        },
+        sendMsg() {
+           let newObj = {
+            "date": "",
+            "text": "",
+            "status": "sent"
+           }
+           for (let i = 0; i < this.contacts.length; i++) {
+              if (this.contacts[i].visible) {
+                  newObj.text = this.newMsg;
+                  this.contacts[i].messages.push(newObj);
+                  console.log(this.contacts[i].messages);
+              }
+           }
         }
     }
 });
 
-// console.log(myApp.getLastReceivedMsg());
+console.log(myApp.contacts[0].messages);
