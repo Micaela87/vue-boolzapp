@@ -43,8 +43,7 @@ img {
 
 .contacts {
     width: 40%;
-    /* debugging rules */
-    background-color: aquamarine;
+    height: 100%;
 }
 
 .notifications {
@@ -96,6 +95,11 @@ img {
     left: 3rem;
 }
 
+.contacts-container {
+    max-height: calc(100% - 15rem);
+    overflow: auto;
+}
+
 .single-contact {
     background-color: #ffffff;
     border: 1px solid #e9ebeb;
@@ -107,6 +111,7 @@ img {
 
 .messages {
     width: 60%;
+    height: 100%;
     /* debugging rules */
     background-color: cadetblue;
 }
@@ -126,7 +131,13 @@ img {
     justify-content: flex-start;
 }
 
+.outer-container {
+    height: calc(100% - 10rem);
+}
+
 .msg-container {
+    max-height: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -146,4 +157,31 @@ img {
 .sent {
     background-color: #d5f9ba;
     align-self: flex-end;
+}
+
+.msg-textarea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    background-color: #f3eeea;
+}
+
+textarea {
+    width: 85%;
+    height: 80%;
+    border: none;
+    border-radius: 10px;
+}
+
+textarea::placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: #828282;
+    margin-left: 1rem;
+}
+
+.msg-icon {
+    font-size: 1.5rem;
+    margin: 0 1rem;
 }

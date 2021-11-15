@@ -34,9 +34,11 @@
                 <i class="fas fa-search search-lens"></i>
                 <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
-            <div v-for="(contact, i) in contacts" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
-                <img :src="contact.avatar" :alt="contact.name">
-                <span>{{ contact.name }}</span>
+            <div class="contacts-container">
+                <div v-for="(contact, i) in contacts" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
+                    <img :src="contact.avatar" :alt="contact.name">
+                    <span>{{ contact.name }}</span>
+                </div>
             </div>
         </div>
         <div class="messages">
@@ -46,12 +48,17 @@
                     {{ contact.name }}
                 </div>
             </div>
-            <div v-for="contact in contacts" v-show="contact.visible">
+            <div v-for="contact in contacts" v-show="contact.visible" class="outer-container">
                 <div class="msg-container">
                     <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'">
                         {{ message.text }}
                     </div>
                 </div>
+            </div>
+            <div class="msg-textarea">
+                <i class="far fa-smile msg-icon"></i>
+                <textarea name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
+                <i class="fas fa-microphone msg-icon"></i>
             </div>
         </div>
     </div>
