@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./public/resources/css/style.css" type="text/css">
     <title>Boolzapp</title>
 </head>
@@ -21,6 +22,17 @@
                 <div class="settings">
     
                 </div>
+            </div>
+            <div class="notifications">
+                <i class="fas fa-bell-slash silent-mode"></i>
+                <div>
+                    <span>Ricevi notifiche di nuovi messaggi</span>
+                    <a href="#">Attiva notifiche desktop</a>
+                </div>
+            </div>
+            <div class="searchbar">
+                <i class="fas fa-search search-lens"></i>
+                <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
             <div v-for="(contact, i) in contacts" class="single-contact" :key="i" @click="showConversation(i)">
                 <img :src="contact.avatar" :alt="contact.name">
