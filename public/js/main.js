@@ -109,8 +109,17 @@ const myApp = new Vue({
                   newObj.text = this.newMsg;
                   this.contacts[i].messages.push(newObj);
                   console.log(this.contacts[i].messages);
+                  setTimeout(this.automaticResponse(i), 1000);
               }
            }
+        },
+        automaticResponse(index) {
+           let newObj = {
+               "date": "",
+               "text": "Ok",
+               "status": "received"
+           }
+           this.contacts[index].messages.push(newObj);
         }
     }
 });
