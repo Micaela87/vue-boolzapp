@@ -135,6 +135,12 @@ img {
     justify-content: flex-start;
 }
 
+.latest-access {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+}
+
 .outer-container {
     height: calc(100% - 10rem);
 }
@@ -149,9 +155,17 @@ img {
 
 .msg {
     border-radius: 10px;
-    padding: 1rem;
-    width: fit-content;
+    padding: 1rem 1rem 0.2rem 1rem;
+    min-width: 35%;
     margin: 1rem;
+}
+
+.msg-date {
+    display: block;
+    text-align: right;
+    color: #b8bbbd;
+    font-size: 0.8rem;
+    margin-top: 1rem;
 }
 
 .received {

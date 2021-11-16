@@ -42,16 +42,20 @@
             </div>
         </div>
         <div class="messages">
-            <div v-for="contact in contacts" v-show="contact.visible" class="chat">
+            <div v-for="(contact, i) in contacts" v-show="contact.visible" class="chat" :key="i">
                 <div class="contact-info">
-                    <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" alt="contact.name">
-                    {{ contact.name }}
+                    <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                    <div>
+                        <span>{{ contact.name }}</span>
+                        <span class="latest-access">Ultimo accesso alle {{ showLatestAccess(i) }}</span>
+                    </div>
                 </div>
             </div>
             <div v-for="contact in contacts" v-show="contact.visible" class="outer-container">
                 <div class="msg-container">
                     <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'">
-                        {{ message.text }}
+                        <span>{{ message.text }}</span>
+                        <span class="msg-date">{{ message.date }}</span>
                     </div>
                 </div>
             </div>

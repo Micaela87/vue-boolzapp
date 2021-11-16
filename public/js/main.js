@@ -151,6 +151,15 @@ const myApp = new Vue({
                }
            });
            console.log(contactsInSearch);
+        },
+        showLatestAccess(index) {
+           let latestAccess = '';
+           this.contacts[index].messages.forEach((message) => {
+              if (message.status === 'received') {
+                  latestAccess = message.date;
+              }
+           });
+           return latestAccess;
         }
     }
 });
