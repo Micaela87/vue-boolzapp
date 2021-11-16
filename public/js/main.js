@@ -13,6 +13,7 @@ const myApp = new Vue({
                "name": "Michele",
                "avatar": "_1",
                "visible": true,
+               "inSearch": true,
                "messages": [
                   {
                      "date": "10/01/2020 15: 30: 55",
@@ -35,6 +36,7 @@ const myApp = new Vue({
                "name": "Fabio",
                "avatar": "_2",
                "visible": false,
+               "inSearch": true,
                "messages": [
                   {
                      "date": "20/03/2020 16: 30: 00",
@@ -57,6 +59,7 @@ const myApp = new Vue({
                "name": "Samuele",
                "avatar": "_3",
                "visible": false,
+               "inSearch": true,
                "messages": [
                   {
                      "date": "28/03/2020 10: 10: 40",
@@ -79,6 +82,7 @@ const myApp = new Vue({
                "name": "Ilario",
                "avatar": "_4",
                "visible": false,
+               "inSearch": true,
                "messages": [
                   {
                      "date": "10/01/2020 15: 30: 55",
@@ -126,6 +130,19 @@ const myApp = new Vue({
                "status": "received"
            }
            this.contacts[index].messages.push(newObj);
+        },
+        contactListDisappears() {
+           this.contacts.forEach((contact) => contact.inSearch = false);
+        },
+        showContactsInSearch() {
+           let contactsInSearch = this.contacts.filter((contact) => {
+               let name = contact.name.toLowerCase();
+               if (name.includes(this.searchParams.toLowerCase())) {
+                  contact.inSearch = true;
+                  return contact;
+               }
+           });
+           console.log(contactsInSearch);
         }
     }
 });

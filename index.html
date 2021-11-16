@@ -32,10 +32,10 @@
             </div>
             <div class="searchbar">
                 <i class="fas fa-search search-lens"></i>
-                <input type="text" placeholder="Cerca o inizia una nuova chat">
+                <input type="text" placeholder="Cerca o inizia una nuova chat" @click="contactListDisappears" @input="showContactsInSearch" v-model="searchParams">
             </div>
             <div class="contacts-container">
-                <div v-for="(contact, i) in contacts" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
+                <div v-for="(contact, i) in contacts" v-show="contact.inSearch" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
                     <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
                     <span>{{ contact.name }}</span>
                 </div>
