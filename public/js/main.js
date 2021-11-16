@@ -140,6 +140,8 @@ const myApp = new Vue({
                if (name.includes(this.searchParams.toLowerCase())) {
                   contact.inSearch = true;
                   return contact;
+               } else {
+                  contact.inSearch = false;
                }
            });
            console.log(contactsInSearch);
