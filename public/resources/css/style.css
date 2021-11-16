@@ -109,11 +109,25 @@ img {
     border: 1px solid #e9ebeb;
 }
 
+.contact-summary {
+    width: 40%;
+}
+
 .latest-msg {
     display: block;
     font-size: 0.8rem;
     color: #828282;
     margin-top: 0.5rem;
+}
+
+.latest-msg-date {
+    align-self: baseline;
+    width: 60%;
+    text-align: right;
+    margin-top: 1.4rem;
+    padding-right: 0.5rem;
+    font-size: 0.8rem;
+    color: #828282;
 }
 
 .selected {
