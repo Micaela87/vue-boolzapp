@@ -3,6 +3,8 @@ const myApp = new Vue({
     data: {
        newMsg: '',
        searchParams: '',
+       active: false,
+       showMenu: false,
         user: {
             name: 'Anna',
             avatar: '_io',
@@ -180,6 +182,10 @@ const myApp = new Vue({
            } else {
               return latestMsg;
            }
+        },
+        removeMsg(index1, index2) {
+           this.contacts[index1].messages.splice(index2, 1);
+            console.log(index1, index2);
         }
     }
 });
