@@ -37,7 +37,10 @@
             <div class="contacts-container">
                 <div v-for="(contact, i) in contacts" v-show="contact.inSearch" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
                     <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
-                    <span>{{ contact.name }}</span>
+                    <div>
+                        <span>{{ contact.name }}</span>
+                        <span class="latest-msg">{{ getLatestMsg(i) }}</span>
+                    </div>
                 </div>
             </div>
         </div>

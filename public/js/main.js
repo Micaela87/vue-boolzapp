@@ -160,6 +160,26 @@ const myApp = new Vue({
               }
            });
            return latestAccess;
+        },
+        getLatestMsg(index) {
+           let latestMsg = '';
+           this.contacts[index].messages.forEach((message) => {
+              if (message.status === 'received') {
+                  latestMsg = message.text;
+              }
+           });
+           let arr = latestMsg.split('');
+           if (arr.length > 15) {
+              for (let i = arr.length -1; i > 15; i--) {
+                 arr.splice(i);
+              }
+           }
+           let formattedMsg = arr.join('');
+           if (formattedMsg.length < latestMsg.length) {
+               return `${formattedMsg}...`;
+           } else {
+              return latestMsg;
+           }
         }
     }
 });

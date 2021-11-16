@@ -109,6 +109,13 @@ img {
     border: 1px solid #e9ebeb;
 }
 
+.latest-msg {
+    display: block;
+    font-size: 0.8rem;
+    color: #828282;
+    margin-top: 0.5rem;
+}
+
 .selected {
     background-color: #e9ebeb;
 }
