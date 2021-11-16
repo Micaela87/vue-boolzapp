@@ -57,9 +57,9 @@
             </div>
             <div v-for="(contact, x) in contacts" v-show="contact.visible" class="outer-container">
                 <div class="msg-container">
-                    <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="active = true" @mouseleave="active = false">
-                        <span>{{ message.text }}</span><span><i class="fas fa-angle-down arrow-down hide" :class="active === true ? 'show' : ''" @click="showMenu === true ? showMenu = false : showMenu = true"></i></span>
-                        <ul v-show="showMenu">
+                    <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)">
+                        <span>{{ message.text }}</span><span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
+                        <ul v-if="currentlyClicking === j" v-show="menuShow">
                             <li>Message info</li>
                             <li @click="removeMsg(x, j)">Delete message</li>
                         </ul>

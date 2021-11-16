@@ -3,8 +3,10 @@ const myApp = new Vue({
     data: {
        newMsg: '',
        searchParams: '',
-       active: false,
-       showMenu: false,
+       currentlyHovering: '',
+       show: false,
+       currentlyClicking: '',
+       menuShow: false,
         user: {
             name: 'Anna',
             avatar: '_io',
@@ -186,6 +188,14 @@ const myApp = new Vue({
         removeMsg(index1, index2) {
            this.contacts[index1].messages.splice(index2, 1);
             console.log(index1, index2);
+        },
+        showArrow(index) {
+            this.currentlyHovering = index;
+            this.show = true;
+        },
+        showMenu(index) {
+           this.currentlyClicking = index;
+            this.menuShow = true;
         }
     }
 });

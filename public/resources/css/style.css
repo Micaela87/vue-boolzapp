@@ -188,14 +188,6 @@ img {
     top: 1rem;
 }
 
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
 .msg ul {
     list-style-type: none;
     background-color: white;
@@ -203,6 +195,9 @@ img {
     position: absolute;
     top: 2rem;
     right: 1rem;
+    box-shadow: #828282;
+    border-radius: 3px;
+    z-index: 1;
 }
 
 .msg ul li {
