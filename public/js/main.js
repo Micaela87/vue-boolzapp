@@ -193,9 +193,16 @@ const myApp = new Vue({
             this.currentlyHovering = index;
             this.show = true;
         },
+        hideArrow() {
+            this.show = false;
+        },
         showMenu(index) {
            this.currentlyClicking = index;
-            this.menuShow = true;
+           if (this.menuShow) {
+              this.menuShow = false;
+           } else {
+               this.menuShow = true;
+           }
         }
     }
 });
