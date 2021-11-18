@@ -72,9 +72,9 @@
                     <div v-for="(message, j) in contacts[currentlySelected].messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow">
                         <span>{{ message.text }}</span>
                         <!-- hover over msg to show arrow -->
-                        <span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
+                        <span v-if="contacts[currentlySelected].messages[j] === message && currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
                         <!-- dropdown menu appears when clicking on the arrow above -->
-                        <ul v-if="currentlyClicking === j" v-show="menuShow">
+                        <ul v-if="contacts[currentlySelected].messages[j] === message && currentlyClicking === j" v-show="menuShow">
                             <li>Message info</li>
                             <li @click="removeMsg(currentlySelected, j)">Delete message</li>
                         </ul>

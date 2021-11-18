@@ -185,7 +185,6 @@ const myApp = new Vue({
          // deletes msg
          removeMsg(index1, index2) {
             this.contacts[index1].messages.splice(index2, 1);
-            console.log(index1, index2);
          },
          // displays arrow when hovering over a msg
          showArrow(index) {
