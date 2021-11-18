@@ -12,6 +12,7 @@ const myApp = new Vue({
          menuShow: false,
          // detects selected contact
          currentlySelected: 0,
+         currentChat: 0,
          // static data
          user: {
             name: 'Anna',
@@ -120,7 +121,7 @@ const myApp = new Vue({
             }
             newObj.text = this.newMsg;
             this.contacts[this.currentlySelected].messages.push(newObj);
-            newMsg = '';
+            this.newMsg = '';
             this.automaticResponse(this.currentlySelected);
          },
          // sends an automatic response
@@ -190,6 +191,7 @@ const myApp = new Vue({
          showArrow(index) {
             this.currentlyHovering = index;
             this.show = true;
+            this.currentChat = this.currentlySelected;
          },
          // hides arrow when the mouse leaves a msg
          hideArrow() {
