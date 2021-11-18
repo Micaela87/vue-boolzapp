@@ -189,6 +189,9 @@ const myApp = new Vue({
          },
          // displays arrow when hovering over a msg
          showArrow(index) {
+            if (this.currentlySelected !== this.currentChat) {
+               this.menuShow = false;
+            }
             this.currentlyHovering = index;
             this.show = true;
             this.currentChat = this.currentlySelected;
