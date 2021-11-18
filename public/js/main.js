@@ -1,23 +1,28 @@
 const myApp = new Vue({
     el: '#app',
     data: {
-       newMsg: '',
-       searchParams: '',
-       currentlyHovering: '',
-       show: false,
-       currentlyClicking: '',
-       menuShow: false,
-        user: {
+         //  dynamic data
+         newMsg: '',
+         searchParams: '',
+         // detects exact message user is hovering over
+         currentlyHovering: '', 
+         show: false,
+         // detects exact arrow clicked to display dropdown menu
+         currentlyClicking: '',
+         menuShow: false,
+         // detects selected contact
+         currentlySelected: 0,
+         // static data
+         user: {
             name: 'Anna',
             avatar: '_io',
             visible: true
-        },
-        contacts: [
+         },
+         contacts: [
             {
                "name": "Michele",
                "avatar": "_1",
                "visible": true,
-               "inSearch": true,
                "messages": [
                   {
                      "date": "10/01/2020 15:30:55",
@@ -39,8 +44,7 @@ const myApp = new Vue({
             {
                "name": "Fabio",
                "avatar": "_2",
-               "visible": false,
-               "inSearch": true,
+               "visible": true,
                "messages": [
                   {
                      "date": "20/03/2020 16:30:00",
@@ -62,8 +66,7 @@ const myApp = new Vue({
             {
                "name": "Samuele",
                "avatar": "_3",
-               "visible": false,
-               "inSearch": true,
+               "visible": true,
                "messages": [
                   {
                      "date": "28/03/2020 10:10:40",
@@ -85,8 +88,7 @@ const myApp = new Vue({
             {
                "name": "Ilario",
                "avatar": "_4",
-               "visible": false,
-               "inSearch": true,
+               "visible": true,
                "messages": [
                   {
                      "date": "10/01/2020 15:30:55",
@@ -101,36 +103,29 @@ const myApp = new Vue({
                ]
             }
          ]
-    },
-    methods: {
-        showConversation(index) {
-            console.log(index);
-            this.contacts[index].visible = true;
-            for (let i = 0; i < this.contacts.length; i++) {
-               if (i !== index) {
-                  this.contacts[i].visible = false;
-               }
-            }
-        },
-        sendMsg() {
+      },
+      // methods
+      methods: {
+         // displays the conversation had with the selected contact
+         showConversation(index) {
+            this.currentlySelected = index;
+         },
+         // adds a msg to the static data
+         sendMsg() {
             let date = dayjs().format('D/M/YYYY' + ' ' + 'HH:mm:ss');
-           let newObj = {
+            let newObj = {
             "date": `${date}`,
             "text": "",
             "status": "sent"
-           }
-           for (let i = 0; i < this.contacts.length; i++) {
-              if (this.contacts[i].visible) {
-                  newObj.text = this.newMsg;
-                  this.contacts[i].messages.push(newObj);
-                  newMsg = '';
-                  this.automaticResponse(i);
-              }
-           }
-           console.log(newObj);
-        },
-        automaticResponse(index) {
-           setTimeout(function() {
+            }
+            newObj.text = this.newMsg;
+            this.contacts[this.currentlySelected].messages.push(newObj);
+            newMsg = '';
+            this.automaticResponse(this.currentlySelected);
+         },
+         // sends an automatic response
+         automaticResponse(index) {
+            setTimeout(function() {
                let date = dayjs().format('D/M/YYYY' + ' ' + 'HH:mm:ss');
                let newObj = {
                      "date": `${date}`,
@@ -138,71 +133,77 @@ const myApp = new Vue({
                      "status": "received"
                }
                myApp.contacts[index].messages.push(newObj);
-               console.log('msg automatico', newObj);
-           }, 1000)
-        },
-        contactListDisappears() {
-           this.contacts.forEach((contact) => contact.inSearch = false);
-        },
-        showContactsInSearch() {
-           let contactsInSearch = this.contacts.filter((contact) => {
+            }, 1000)
+         },
+         // hides all contacts when focus is on the searchbar
+         contactListDisappears() {
+            this.contacts.forEach((contact) => contact.visible = false);
+         },
+         // searches for the contacts according to searchParams
+         showContactsInSearch() {
+            let contactsInSearch = this.contacts.filter((contact) => {
                let name = contact.name.toLowerCase();
                if (name.includes(this.searchParams.toLowerCase())) {
-                  contact.inSearch = true;
-                  return contact;
+                  contact.visible = true;
                } else {
-                  contact.inSearch = false;
+                  contact.visible = false;
                }
-           });
-           console.log(contactsInSearch);
-        },
-        showLatestAccess(index) {
-           let latestAccess = '';
-           this.contacts[index].messages.forEach((message) => {
-              if (message.status === 'received') {
+            });
+         },
+         // displays latest access according to the last msg received from the selected contact
+         showLatestAccess(index) {
+            let latestAccess = '';
+            this.contacts[index].messages.forEach((message) => {
+               if (message.status === 'received') {
                   latestAccess = message.date;
-              }
-           });
-           return latestAccess;
-        },
-        getLatestMsg(index) {
-           let latestMsg = '';
-           this.contacts[index].messages.forEach((message) => {
-              if (message.status === 'received') {
+               }
+            });
+            return latestAccess;
+         },
+         // displays the last msg sent from each contact
+         getLatestMsg(index) {
+            let latestMsg = '';
+            this.contacts[index].messages.forEach((message) => {
+               if (message.status === 'received') {
                   latestMsg = message.text;
-              }
-           });
-           let arr = latestMsg.split('');
-           if (arr.length > 15) {
-              for (let i = arr.length -1; i > 15; i--) {
-                 arr.splice(i);
-              }
-           }
-           let formattedMsg = arr.join('');
-           if (formattedMsg.length < latestMsg.length) {
+               }
+            });
+            // shortens msg if too long
+            let arr = latestMsg.split('');
+            if (arr.length > 15) {
+               for (let i = arr.length -1; i > 15; i--) {
+                  arr.splice(i);
+               }
+            }
+            let formattedMsg = arr.join('');
+            if (formattedMsg.length < latestMsg.length) {
                return `${formattedMsg}...`;
-           } else {
-              return latestMsg;
-           }
-        },
-        removeMsg(index1, index2) {
-           this.contacts[index1].messages.splice(index2, 1);
+            } else {
+               return latestMsg;
+            }
+         },
+         // deletes msg
+         removeMsg(index1, index2) {
+            this.contacts[index1].messages.splice(index2, 1);
             console.log(index1, index2);
-        },
-        showArrow(index) {
+         },
+         // displays arrow when hovering over a msg
+         showArrow(index) {
             this.currentlyHovering = index;
             this.show = true;
-        },
-        hideArrow() {
+         },
+         // hides arrow when the mouse leaves a msg
+         hideArrow() {
             this.show = false;
-        },
-        showMenu(index) {
-           this.currentlyClicking = index;
-           if (this.menuShow) {
-              this.menuShow = false;
-           } else {
+         },
+         // displays the dropdown menu when clicking on arrow
+         showMenu(index) {
+            this.currentlyClicking = index;
+            if (this.menuShow) {
+               this.menuShow = false;
+            } else {
                this.menuShow = true;
-           }
-        }
-    }
+            }
+         }
+      }
 });

@@ -44,7 +44,7 @@
             <!-- contacts container -->
             <div class="contacts-container">
                 <!-- loops through contacs list and prints each contact -->
-                <div v-for="(contact, i) in contacts" v-show="contact.inSearch" class="single-contact" :class="contact.visible ? 'selected' : ''" :key="i" @click="showConversation(i)">
+                <div v-for="(contact, i) in contacts" v-show="contact.visible" class="single-contact" :class="i === currentlySelected ? 'selected' : ''" :key="i" @click="showConversation(i)">
                     <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
                     <div class="contact-summary">
                         <span>{{ contact.name }}</span>
@@ -56,27 +56,27 @@
         </div>
         <!-- messages general container -->
         <div class="messages">
-            <!-- loops through contacts list and prints each contact -->
-            <div v-for="(contact, i) in contacts" v-show="contact.visible" class="chat" :key="i">
+            <!-- prints selected contact -->
+            <div class="chat">
                 <div class="contact-info">
-                    <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                    <img :src="'./public/resources/img/avatar' + contacts[currentlySelected].avatar + '.jpg'" :alt="contacts[currentlySelected].name">
                     <div>
-                        <span>{{ contact.name }}</span>
-                        <span class="latest-access">Ultimo accesso il {{ showLatestAccess(i) }}</span>
+                        <span>{{ contacts[currentlySelected].name }}</span>
+                        <span class="latest-access">Ultimo accesso il {{ showLatestAccess(currentlySelected) }}</span>
                     </div>
                 </div>
             </div>
-            <!-- loops through contacts list and prints the conversations -->
-            <div v-for="(contact, x) in contacts" v-show="contact.visible" class="outer-container">
+            <!-- loops through selected contact data and prints the conversations -->
+            <div class="outer-container">
                 <div class="msg-container">
-                    <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow">
+                    <div v-for="(message, j) in contacts[currentlySelected].messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow">
                         <span>{{ message.text }}</span>
                         <!-- hover over msg to show arrow -->
                         <span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
                         <!-- dropdown menu appears when clicking on the arrow above -->
                         <ul v-if="currentlyClicking === j" v-show="menuShow">
                             <li>Message info</li>
-                            <li @click="removeMsg(x, j)">Delete message</li>
+                            <li @click="removeMsg(currentlySelected, j)">Delete message</li>
                         </ul>
                         <span class="msg-date">{{ message.date }}</span>
                     </div>
