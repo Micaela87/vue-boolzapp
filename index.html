@@ -39,7 +39,7 @@
             <!-- searchbar -->
             <div class="searchbar">
                 <i class="fas fa-search search-lens"></i>
-                <input type="text" placeholder="Cerca o inizia una nuova chat" @focus="contactListDisappears" @input="showContactsInSearch" v-model="searchParams">
+                <input type="text" placeholder="Cerca o inizia una nuova chat" @focus="contactListDisappears" @blur="showAllContacts" @input="showContactsInSearch" v-model="searchParams">
             </div>
             <!-- contacts container -->
             <div class="contacts-container">

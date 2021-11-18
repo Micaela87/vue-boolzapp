@@ -203,6 +203,9 @@ const myApp = new Vue({
             } else {
                this.menuShow = true;
             }
+         },
+         showAllContacts() {
+            this.contacts.forEach((contact) => contact.visible = true);
          }
       }
 });
