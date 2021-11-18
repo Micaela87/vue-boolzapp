@@ -12,17 +12,23 @@
     <title>Boolzapp</title>
 </head>
 <body>
+    <!-- general container -->
     <div id="app" class="container">
+        <!-- contacts general container -->
         <div class="contacts">
+            <!-- navbar -->
             <div class="navbar">
+                <!-- user info -->
                 <div class="user">
                     <img :src="'./public/resources/img/avatar' + user.avatar + '.jpg'" alt="user.name">
                     {{ user.name }}
                 </div>
+                <!-- user controls and settings -->
                 <div class="settings">
     
                 </div>
             </div>
+            <!-- notifications -->
             <div class="notifications">
                 <i class="fas fa-bell-slash silent-mode"></i>
                 <div>
@@ -30,12 +36,15 @@
                     <a href="#">Attiva notifiche desktop</a>
                 </div>
             </div>
+            <!-- searchbar -->
             <div class="searchbar">
                 <i class="fas fa-search search-lens"></i>
                 <input type="text" placeholder="Cerca o inizia una nuova chat" @focus="contactListDisappears" @input="showContactsInSearch" v-model="searchParams">
             </div>
+            <!-- contacts container -->
             <div class="contacts-container">
-                <div v-for="(contact, i) in contacts" v-show="contact.inSearch" class="single-contact" :class="contact.visible === true ? 'selected' : ''" :key="i" @click="showConversation(i)">
+                <!-- loops through contacs list and prints each contact -->
+                <div v-for="(contact, i) in contacts" v-show="contact.inSearch" class="single-contact" :class="contact.visible ? 'selected' : ''" :key="i" @click="showConversation(i)">
                     <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
                     <div class="contact-summary">
                         <span>{{ contact.name }}</span>
@@ -45,7 +54,9 @@
                 </div>
             </div>
         </div>
+        <!-- messages general container -->
         <div class="messages">
+            <!-- loops through contacts list and prints each contact -->
             <div v-for="(contact, i) in contacts" v-show="contact.visible" class="chat" :key="i">
                 <div class="contact-info">
                     <img :src="'./public/resources/img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
@@ -55,10 +66,14 @@
                     </div>
                 </div>
             </div>
+            <!-- loops through contacts list and prints the conversations -->
             <div v-for="(contact, x) in contacts" v-show="contact.visible" class="outer-container">
                 <div class="msg-container">
                     <div v-for="(message, j) in contact.messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow">
-                        <span>{{ message.text }}</span><span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
+                        <span>{{ message.text }}</span>
+                        <!-- hover over msg to show arrow -->
+                        <span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
+                        <!-- dropdown menu appears when clicking on the arrow above -->
                         <ul v-if="currentlyClicking === j" v-show="menuShow">
                             <li>Message info</li>
                             <li @click="removeMsg(x, j)">Delete message</li>
@@ -67,6 +82,7 @@
                     </div>
                 </div>
             </div>
+            <!-- container for texting -->
             <div class="msg-textarea">
                 <i class="far fa-smile msg-icon"></i>
                 <textarea v-model="newMsg" @keyup.enter="sendMsg" name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
