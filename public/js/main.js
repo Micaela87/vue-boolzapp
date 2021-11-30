@@ -10,9 +10,10 @@ const myApp = new Vue({
          // detects exact arrow clicked to display dropdown menu
          currentlyClicking: '',
          menuShow: false,
+         condition: false,
          // detects selected contact
          currentlySelected: 0,
-         currentChat: 0,
+         currentIndex: 0,
          // static data
          user: {
             name: 'Anna',
@@ -110,6 +111,7 @@ const myApp = new Vue({
          // displays the conversation had with the selected contact
          showConversation(index) {
             this.currentlySelected = index;
+            this.menuShow = false;
          },
          // adds a msg to the static data
          sendMsg() {
@@ -119,10 +121,13 @@ const myApp = new Vue({
             "text": "",
             "status": "sent"
             }
-            newObj.text = this.newMsg;
-            this.contacts[this.currentlySelected].messages.push(newObj);
-            this.newMsg = '';
-            this.automaticResponse(this.currentlySelected);
+            
+            if (this.newMsg.length !== 0) {
+               newObj.text = this.newMsg;
+               this.contacts[this.currentlySelected].messages.push(newObj);
+               this.automaticResponse(this.currentlySelected);
+               this.newMsg = '';
+            }
          },
          // sends an automatic response
          automaticResponse(index) {
@@ -134,7 +139,8 @@ const myApp = new Vue({
                      "status": "received"
                }
                myApp.contacts[index].messages.push(newObj);
-            }, 1000)
+            }, 1000);
+            this.scrollHeight();
          },
          // hides all contacts when focus is on the searchbar
          contactListDisappears() {
@@ -186,15 +192,13 @@ const myApp = new Vue({
          // deletes msg
          removeMsg(index1, index2) {
             this.contacts[index1].messages.splice(index2, 1);
+            this.menuShow = false;
          },
          // displays arrow when hovering over a msg
          showArrow(index) {
-            if (this.currentlySelected !== this.currentChat) {
-               this.menuShow = false;
-            }
             this.currentlyHovering = index;
             this.show = true;
-            this.currentChat = this.currentlySelected;
+            this.currentIndex = Number(this.$refs.message[index].getAttribute('data-id'));
          },
          // hides arrow when the mouse leaves a msg
          hideArrow() {
@@ -203,6 +207,9 @@ const myApp = new Vue({
          // displays the dropdown menu when clicking on arrow
          showMenu(index) {
             this.currentlyClicking = index;
+            if (this.currentIndex === this.currentlySelected) {
+               this.condition = true;
+            }
             if (this.menuShow) {
                this.menuShow = false;
             } else {
@@ -211,6 +218,6 @@ const myApp = new Vue({
          },
          showAllContacts() {
             this.contacts.forEach((contact) => contact.visible = true);
-         }
+         },
       }
 });

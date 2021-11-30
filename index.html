@@ -20,7 +20,7 @@
             <div class="navbar">
                 <!-- user info -->
                 <div class="user">
-                    <img :src="'./public/resources/img/avatar' + user.avatar + '.jpg'" alt="user.name">
+                    <img :src="'./public/resources/img/avatar' + user.avatar + '.jpg'" :alt="user.name">
                     {{ user.name }}
                 </div>
                 <!-- user controls and settings -->
@@ -68,13 +68,13 @@
             </div>
             <!-- loops through selected contact data and prints the conversations -->
             <div class="outer-container">
-                <div class="msg-container">
-                    <div v-for="(message, j) in contacts[currentlySelected].messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow">
+                <div class="msg-container" ref="container">
+                    <div ref="message" v-for="(message, j) in contacts[currentlySelected].messages" :key="j" class="msg" :class="message.status === 'received' ? 'received' : 'sent'" @mouseover="showArrow(j)" @mouseleave="hideArrow" :data-id="currentlySelected">
                         <span>{{ message.text }}</span>
                         <!-- hover over msg to show arrow -->
                         <span v-if="currentlyHovering === j" v-show="show" @click="showMenu(j)"><i class="fas fa-angle-down arrow-down"></i></span>
                         <!-- dropdown menu appears when clicking on the arrow above -->
-                        <ul v-if="currentChat === currentlySelected && currentlyClicking === j" v-show="menuShow">
+                        <ul v-if="condition && currentlyClicking === j" v-show="menuShow">
                             <li>Message info</li>
                             <li @click="removeMsg(currentlySelected, j)">Delete message</li>
                         </ul>
@@ -85,7 +85,7 @@
             <!-- container for texting -->
             <div class="msg-textarea">
                 <i class="far fa-smile msg-icon"></i>
-                <textarea v-model="newMsg" @keyup.enter="sendMsg" name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
+                <textarea v-model.trim="newMsg" @keyup.enter="sendMsg" name="msg-text" id="msg-text" placeholder="Scrivi un messaggio"></textarea>
                 <i class="fas fa-microphone msg-icon"></i>
             </div>
         </div>
