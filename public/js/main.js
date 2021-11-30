@@ -10,10 +10,8 @@ const myApp = new Vue({
          // detects exact arrow clicked to display dropdown menu
          currentlyClicking: '',
          menuShow: false,
-         condition: false,
          // detects selected contact
          currentlySelected: 0,
-         currentIndex: 0,
          // static data
          user: {
             name: 'Anna',
@@ -198,7 +196,6 @@ const myApp = new Vue({
          showArrow(index) {
             this.currentlyHovering = index;
             this.show = true;
-            this.currentIndex = Number(this.$refs.message[index].getAttribute('data-id'));
          },
          // hides arrow when the mouse leaves a msg
          hideArrow() {
@@ -207,9 +204,6 @@ const myApp = new Vue({
          // displays the dropdown menu when clicking on arrow
          showMenu(index) {
             this.currentlyClicking = index;
-            if (this.currentIndex === this.currentlySelected) {
-               this.condition = true;
-            }
             if (this.menuShow) {
                this.menuShow = false;
             } else {
